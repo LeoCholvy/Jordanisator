@@ -1,0 +1,399 @@
+[
+    {
+        "uuid": "96bd3920-4f36-d026-2b28-c683eb0bcac5",
+        "displayName": "Standard",
+        "description": "Standard VALORANT. Switch between attack and defense at the half. Plant, defuse, or eliminate the enemy team to win rounds. First to 13 wins.",
+        "duration": "30-40 MINS",
+        "economyType": null,
+        "allowsMatchTimeouts": true,
+        "isTeamVoiceAllowed": true,
+        "isMinimapHidden": false,
+        "orbCount": 1,
+        "roundsPerHalf": -1,
+        "teamRoles": null,
+        "gameFeatureOverrides": null,
+        "gameRuleBoolOverrides": [
+            {
+                "ruleName": "EGameRuleBoolName::AccoladesEnabled",
+                "state": true
+            }
+        ],
+        "displayIcon": "https://media.valorant-api.com/gamemodes/96bd3920-4f36-d026-2b28-c683eb0bcac5/displayicon.png",
+        "listViewIconTall": "https://media.valorant-api.com/gamemodes/96bd3920-4f36-d026-2b28-c683eb0bcac5/listviewicontall.png",
+        "assetPath": "ShooterGame/Content/GameModes/Bomb/BombGameMode_PrimaryAsset"
+    },
+    {
+        "uuid": "a8790ec5-4237-f2f0-e93b-08a8e89865b2",
+        "displayName": "Deathmatch",
+        "description": "Practice your gunplay in a quick free-for-all. No abilities, economy, or rounds. First player to 40 kills wins.",
+        "duration": "7-9 MINS",
+        "economyType": "EEconomyTypes::Other",
+        "allowsMatchTimeouts": false,
+        "isTeamVoiceAllowed": false,
+        "isMinimapHidden": false,
+        "orbCount": 1,
+        "roundsPerHalf": -1,
+        "teamRoles": [
+            "EAresTeamRole::FreeForAll"
+        ],
+        "gameFeatureOverrides": [
+            {
+                "featureName": "EGameFeatureToggleName::AllowShoppingWhileDead",
+                "state": true
+            },
+            {
+                "featureName": "EGameFeatureToggleName::UseServerAuthoritativeDropOut",
+                "state": true
+            }
+        ],
+        "gameRuleBoolOverrides": [
+            {
+                "ruleName": "EGameRuleBoolName::CombatReportOnlyShowLastLife",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::AssignRandomAgents",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::SkipPregame",
+                "state": true
+            }
+        ],
+        "displayIcon": "https://media.valorant-api.com/gamemodes/a8790ec5-4237-f2f0-e93b-08a8e89865b2/displayicon.png",
+        "listViewIconTall": "https://media.valorant-api.com/gamemodes/a8790ec5-4237-f2f0-e93b-08a8e89865b2/listviewicontall.png",
+        "assetPath": "ShooterGame/Content/GameModes/Deathmatch/DeathmatchGameMode_PrimaryAsset"
+    },
+    {
+        "uuid": "d2d0f229-4514-517a-b10a-aaa0ef0d4a67",
+        "displayName": "Bot Match",
+        "description": null,
+        "duration": null,
+        "economyType": null,
+        "allowsMatchTimeouts": false,
+        "isTeamVoiceAllowed": true,
+        "isMinimapHidden": false,
+        "orbCount": 1,
+        "roundsPerHalf": 4,
+        "teamRoles": null,
+        "gameFeatureOverrides": null,
+        "gameRuleBoolOverrides": [
+            {
+                "ruleName": "EGameRuleBoolName::FillWithBots",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::ContextAwareModuleEnabled",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::AllowDropOut",
+                "state": true
+            }
+        ],
+        "displayIcon": "https://media.valorant-api.com/gamemodes/d2d0f229-4514-517a-b10a-aaa0ef0d4a67/displayicon.png",
+        "listViewIconTall": "https://media.valorant-api.com/gamemodes/d2d0f229-4514-517a-b10a-aaa0ef0d4a67/listviewicontall.png",
+        "assetPath": "ShooterGame/Content/GameModes/ExamplePlayerTestBot/BotTrainingMatch_GameMode_PrimaryAsset"
+    },
+    {
+        "uuid": "a4ed6518-4741-6dcb-35bd-f884aecdc859",
+        "displayName": "Escalation",
+        "description": "Eliminate enemies to advance your team\u2019s arsenal. Cycle through a series of 12 randomized weapons.  First to complete the series wins.",
+        "duration": "7-9 MINS",
+        "economyType": "EEconomyTypes::Other",
+        "allowsMatchTimeouts": false,
+        "isTeamVoiceAllowed": true,
+        "isMinimapHidden": false,
+        "orbCount": 1,
+        "roundsPerHalf": -1,
+        "teamRoles": null,
+        "gameFeatureOverrides": [
+            {
+                "featureName": "EGameFeatureToggleName::DeathmatchEncourageFarSpawning",
+                "state": false
+            }
+        ],
+        "gameRuleBoolOverrides": [
+            {
+                "ruleName": "EGameRuleBoolName::AssignRandomAgents",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::SkipPregame",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::CombatReportOnlyShowLastLife",
+                "state": true
+            }
+        ],
+        "displayIcon": "https://media.valorant-api.com/gamemodes/a4ed6518-4741-6dcb-35bd-f884aecdc859/displayicon.png",
+        "listViewIconTall": "https://media.valorant-api.com/gamemodes/a4ed6518-4741-6dcb-35bd-f884aecdc859/listviewicontall.png",
+        "assetPath": "ShooterGame/Content/GameModes/GunGame/GunGameTeamsGameMode_PrimaryAsset"
+    },
+    {
+        "uuid": "e086db66-47fd-e791-ca81-06a645ac7661",
+        "displayName": "Team Deathmatch",
+        "description": "Ability-enabled team deathmatch on a unique set of maps. Progress through a series of increasingly powerful loadouts. First team to 100 kills wins.",
+        "duration": "8-10 MINS",
+        "economyType": "EEconomyTypes::Other",
+        "allowsMatchTimeouts": false,
+        "isTeamVoiceAllowed": true,
+        "isMinimapHidden": false,
+        "orbCount": 1,
+        "roundsPerHalf": -1,
+        "teamRoles": null,
+        "gameFeatureOverrides": [
+            {
+                "featureName": "EGameFeatureToggleName::AllowShoppingWhileDead",
+                "state": true
+            },
+            {
+                "featureName": "EGameFeatureToggleName::EquippableCacheRecycling",
+                "state": true
+            },
+            {
+                "featureName": "EGameFeatureToggleName::UseMeshMaterialManagerAlt",
+                "state": true
+            },
+            {
+                "featureName": "EGameFeatureToggleName::DisableFogOfWar",
+                "state": true
+            }
+        ],
+        "gameRuleBoolOverrides": [
+            {
+                "ruleName": "EGameRuleBoolName::DestroyAbilitiesOnDeath",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::PipAbilityCasting",
+                "state": false
+            },
+            {
+                "ruleName": "EGameRuleBoolName::CombatReportOnlyShowLastLife",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::PreventAbilityRecharge",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::UseAllAbilityCooldowns",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::DownedCharactersCanGiveUp",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::UseInDevWeapons",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::AccoladesEnabled",
+                "state": true
+            }
+        ],
+        "displayIcon": "https://media.valorant-api.com/gamemodes/e086db66-47fd-e791-ca81-06a645ac7661/displayicon.png",
+        "listViewIconTall": "https://media.valorant-api.com/gamemodes/e086db66-47fd-e791-ca81-06a645ac7661/listviewicontall.png",
+        "assetPath": "ShooterGame/Content/GameModes/HURM/HURM_PrimaryAsset"
+    },
+    {
+        "uuid": "2b470a47-40e0-ad02-73b4-7f8585fa108c",
+        "displayName": "Basic Training",
+        "description": "Replay the tutorial!",
+        "duration": null,
+        "economyType": null,
+        "allowsMatchTimeouts": false,
+        "isTeamVoiceAllowed": true,
+        "isMinimapHidden": true,
+        "orbCount": 1,
+        "roundsPerHalf": -1,
+        "teamRoles": null,
+        "gameFeatureOverrides": [
+            {
+                "featureName": "EGameFeatureToggleName::RemoveDeletedFXCsFromPool",
+                "state": true
+            }
+        ],
+        "gameRuleBoolOverrides": [
+            {
+                "ruleName": "EGameRuleBoolName::SkipPregame",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::AssignRandomAgents",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::DisableShopSelling",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::CombatReportOnlyShowLastLife",
+                "state": true
+            }
+        ],
+        "displayIcon": null,
+        "listViewIconTall": "https://media.valorant-api.com/gamemodes/2b470a47-40e0-ad02-73b4-7f8585fa108c/listviewicontall.png",
+        "assetPath": "ShooterGame/Content/GameModes/NPEV2/NPEV2_GameMode_PrimaryAsset"
+    },
+    {
+        "uuid": "d2b4e425-4cab-8d95-eb26-bb9b444551dc",
+        "displayName": "Onboarding",
+        "description": null,
+        "duration": null,
+        "economyType": null,
+        "allowsMatchTimeouts": false,
+        "isTeamVoiceAllowed": true,
+        "isMinimapHidden": true,
+        "orbCount": 1,
+        "roundsPerHalf": -1,
+        "teamRoles": null,
+        "gameFeatureOverrides": null,
+        "gameRuleBoolOverrides": null,
+        "displayIcon": null,
+        "listViewIconTall": null,
+        "assetPath": "ShooterGame/Content/GameModes/NewPlayerExperience/NPEGameMode_PrimaryAsset"
+    },
+    {
+        "uuid": "4744698a-4513-dc96-9c22-a9aa437e4a58",
+        "displayName": "Replication",
+        "description": "Same rules as unrated, but all players on the same team are the same agent. Set credits per round, first to 5 rounds wins.",
+        "duration": "10-15 MINS",
+        "economyType": null,
+        "allowsMatchTimeouts": false,
+        "isTeamVoiceAllowed": true,
+        "isMinimapHidden": false,
+        "orbCount": 1,
+        "roundsPerHalf": 4,
+        "teamRoles": null,
+        "gameFeatureOverrides": null,
+        "gameRuleBoolOverrides": [
+            {
+                "ruleName": "EGameRuleBoolName::MajorityVoteAgents",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::IsOvertimeWinByTwo",
+                "state": false
+            }
+        ],
+        "displayIcon": "https://media.valorant-api.com/gamemodes/4744698a-4513-dc96-9c22-a9aa437e4a58/displayicon.png",
+        "listViewIconTall": "https://media.valorant-api.com/gamemodes/4744698a-4513-dc96-9c22-a9aa437e4a58/listviewicontall.png",
+        "assetPath": "ShooterGame/Content/GameModes/OneForAll/OneForAll_GameMode_DataAsset_Desktop"
+    },
+    {
+        "uuid": "e921d1e6-416b-c31f-1291-74930c330b7b",
+        "displayName": "Spike Rush",
+        "description": "Shorter games of VALORANT with added powerup orbs and randomized weapons. Plant, defuse, or eliminate the enemy team to win rounds. First to 4 wins.",
+        "duration": "8-12 MINS",
+        "economyType": null,
+        "allowsMatchTimeouts": false,
+        "isTeamVoiceAllowed": true,
+        "isMinimapHidden": false,
+        "orbCount": 1,
+        "roundsPerHalf": 3,
+        "teamRoles": null,
+        "gameFeatureOverrides": null,
+        "gameRuleBoolOverrides": [
+            {
+                "ruleName": "EGameRuleBoolName::AccoladesEnabled",
+                "state": true
+            }
+        ],
+        "displayIcon": "https://media.valorant-api.com/gamemodes/e921d1e6-416b-c31f-1291-74930c330b7b/displayicon.png",
+        "listViewIconTall": "https://media.valorant-api.com/gamemodes/e921d1e6-416b-c31f-1291-74930c330b7b/listviewicontall.png",
+        "assetPath": "ShooterGame/Content/GameModes/QuickBomb/QuickBombGameMode_PrimaryAsset"
+    },
+    {
+        "uuid": "e2dc3878-4fe5-d132-28f8-3d8c259efcc6",
+        "displayName": "The Range",
+        "description": "Warm up with all weapons and agents unlocked!",
+        "duration": null,
+        "economyType": null,
+        "allowsMatchTimeouts": false,
+        "isTeamVoiceAllowed": true,
+        "isMinimapHidden": true,
+        "orbCount": 1,
+        "roundsPerHalf": -1,
+        "teamRoles": null,
+        "gameFeatureOverrides": null,
+        "gameRuleBoolOverrides": [
+            {
+                "ruleName": "EGameRuleBoolName::ContextAwareModuleEnabled",
+                "state": true
+            }
+        ],
+        "displayIcon": null,
+        "listViewIconTall": "https://media.valorant-api.com/gamemodes/e2dc3878-4fe5-d132-28f8-3d8c259efcc6/listviewicontall.png",
+        "assetPath": "ShooterGame/Content/GameModes/ShootingRange/ShootingRangeGameMode_PrimaryAsset"
+    },
+    {
+        "uuid": "57038d6d-49b1-3a74-c5ef-3395d9f23a97",
+        "displayName": "Snowball Fight",
+        "description": null,
+        "duration": "5-7 MINS",
+        "economyType": null,
+        "allowsMatchTimeouts": false,
+        "isTeamVoiceAllowed": true,
+        "isMinimapHidden": false,
+        "orbCount": 1,
+        "roundsPerHalf": -1,
+        "teamRoles": [
+            "EAresTeamRole::Attacker",
+            "EAresTeamRole::Defender"
+        ],
+        "gameFeatureOverrides": [
+            {
+                "featureName": "EGameFeatureToggleName::DeathmatchEncourageFarSpawning",
+                "state": false
+            }
+        ],
+        "gameRuleBoolOverrides": [
+            {
+                "ruleName": "EGameRuleBoolName::AssignRandomAgents",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::SkipPregame",
+                "state": true
+            },
+            {
+                "ruleName": "EGameRuleBoolName::CombatReportOnlyShowLastLife",
+                "state": true
+            }
+        ],
+        "displayIcon": "https://media.valorant-api.com/gamemodes/57038d6d-49b1-3a74-c5ef-3395d9f23a97/displayicon.png",
+        "listViewIconTall": null,
+        "assetPath": "ShooterGame/Content/GameModes/SnowballFight/SnowballFightGameMode_PrimaryAsset"
+    },
+    {
+        "uuid": "5d0f264b-4ebe-cc63-c147-809e1374484b",
+        "displayName": "Swiftplay",
+        "description": "Shorter games of VALORANT with a simplified economy. Plant, defuse, or eliminate the enemy team to win rounds. First to 5 wins.",
+        "duration": "10-15 MIN",
+        "economyType": null,
+        "allowsMatchTimeouts": false,
+        "isTeamVoiceAllowed": true,
+        "isMinimapHidden": false,
+        "orbCount": 1,
+        "roundsPerHalf": 4,
+        "teamRoles": null,
+        "gameFeatureOverrides": null,
+        "gameRuleBoolOverrides": [
+            {
+                "ruleName": "EGameRuleBoolName::IsOvertimeWinByTwo",
+                "state": false
+            },
+            {
+                "ruleName": "EGameRuleBoolName::AccoladesEnabled",
+                "state": true
+            }
+        ],
+        "displayIcon": "https://media.valorant-api.com/gamemodes/5d0f264b-4ebe-cc63-c147-809e1374484b/displayicon.png",
+        "listViewIconTall": "https://media.valorant-api.com/gamemodes/5d0f264b-4ebe-cc63-c147-809e1374484b/listviewicontall.png",
+        "assetPath": "ShooterGame/Content/GameModes/_Development/Swiftplay_EndOfRoundCredits/SwiftPlay_GameMode_PrimaryAsset"
+    }
+]
