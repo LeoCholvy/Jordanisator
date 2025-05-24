@@ -5,8 +5,10 @@ import os
 import ssl
 from pathlib import Path
 import sys
-
 import websockets
+import pprint
+from json_to_struct import get_structure_from_json
+import logging
 
 LOCKFILE_PATHS = [
     Path(os.getenv('LOCALAPPDATA', '')) / "Riot Games" / "Riot Client" / "Config" / "lockfile",
@@ -14,9 +16,11 @@ LOCKFILE_PATHS = [
 ]
 
 SUBSCRIBE_MSG = '[5, "OnJsonApiEvent"]'
-TIMEOUT_SECONDS = 120
+TIMEOUT_SECONDS = 60 * 5  # 5 minutes
 
-PRES = []
+EVENTS = []
+EVENTS_TYPES = {}
+# EVENTS_STRUCT = []
 
 class LockfileNotFound(Exception):
     pass
@@ -24,7 +28,8 @@ def parse_lockfile() -> dict:
     for path in LOCKFILE_PATHS:
         if path.exists():
             parts = path.read_text().strip().split(':')
-            print("LockFile:", parts)
+            # print("LockFile:", parts)
+            logging.info("LockFile: %s", parts)
             return {
                 'process_name': parts[0],
                 'pid'         : parts[1],
@@ -33,7 +38,7 @@ def parse_lockfile() -> dict:
                 'protocol'    : parts[4],
             }
     raise LockfileNotFound("Aucun lockfile Riot trouvé. Le jeu ne semble pas lancé.")
-
+from json_to_struct import get_structure_from_json
 async def listen_for_event():
     # 1) Lecture du lockfile
     try:
@@ -51,47 +56,58 @@ async def listen_for_event():
     auth_token = base64.b64encode(f"riot:{lf['password']}".encode()).decode()
     headers = {"Authorization": f"Basic {auth_token}"}
 
-    try:
-        async with websockets.connect(
-            uri,
-            subprotocols=["wamp"],
-            ssl=ssl_ctx,
-            origin="https://127.0.0.1",
-            additional_headers=headers
-        ) as ws:
-            await ws.send(SUBSCRIBE_MSG)
-            await ws.send(SUBSCRIBE_MSG)
+    async with websockets.connect(
+        uri,
+        subprotocols=["wamp"],
+        ssl=ssl_ctx,
+        origin="https://127.0.0.1",
+        additional_headers=headers
+    ) as ws:
+        await ws.send(SUBSCRIBE_MSG)
+        await ws.send(SUBSCRIBE_MSG)
 
-            try:
-                async with asyncio.timeout(TIMEOUT_SECONDS):
-                    while True:
+        try:
+            async with asyncio.timeout(TIMEOUT_SECONDS):
+                while True:
+                    try:
                         msg = await ws.recv()
                         arr = json.loads(msg)
-                        if not (isinstance(arr, list) and len(arr) >= 3 and isinstance(arr[2], dict)):
+                        if not (isinstance(arr, list) and len(arr) >= 3 and isinstance(arr[2], dict) and arr[1] == 'OnJsonApiEvent'):
+                            # print("WTF:", msg, '-----------------')
+                            logging.warning("Message inattendu reçu : %s", msg)
                             continue
                         payload = arr[2]
-                        if type(payload) != dict:
-                            print("Payload invalide :", payload)
+                        if payload.get('data') is None:
+                            # print("Aucun data dans le message :", msg)
+                            logging.warning("Aucun 'data' dans le message : %s", msg)
                             continue
-                        if payload.get('data').get('ackRequired') != None:
-                            continue
-                        print("Payload reçu :", payload.get('data').keys())
-                        if payload.get('data').get('presences'):
-                            PRES.append(payload.get('data').get('presences'))
-                        if payload.get('data').get('phase'):
-                            print("Payload de phase :", payload.get('data').get('phase'))
-                        # if payload.get('data').get('friends'):
-                        #     print("Payload d'amis :", payload.get('data').get('friends'))
-            except asyncio.TimeoutError:
-                print(f"Aucun événement de présence reçu sous {TIMEOUT_SECONDS}s. Aucune partie en cours.")
-            except Exception:
-                print("Erreur lors de la réception du message :", msg)
-    except Exception as e:
-        print("Erreur de connexion au WebSocket :", e)
-        sys.exit(1)
-    except KeyboardInterrupt as e:
-        print("Interruption du programme :", e)
+                        EVENTS.append(payload)
+                        msg_type = (arr[0], arr[1], payload.get('eventType'), payload.get('uri'), '|'.join(list(payload.get('data').keys())))
+                        msg_type = [str(x) for x in msg_type if x is not None]
+                        msg_type = ' | '.join(msg_type)
+                        if msg_type not in EVENTS_TYPES:
+                            event_structure = get_structure_from_json(payload.get('data'))
+                            EVENTS_TYPES[msg_type] = event_structure
+                            # print(msg_type)
+                            logging.info("Nouveau type d'événement : %s", msg_type)
+                            # pprint(get_structure_from_json(payload.get('data')))
+                            logging.info("Structure de l'événement : %s", pprint.pformat(get_structure_from_json(payload.get('data'))))
+                            logging.info('\n\n')
+                    except Exception as e:
+                        print(e)
+                        # print("Erreur lors de la réception du message :", msg)
+                        logging.error("Erreur lors de la réception du message : %s", msg)
+        except asyncio.TimeoutError:
+            # print(f"Timeout de {TIMEOUT_SECONDS} secondes atteint. Fin de l'écoute.")
+            logging.CRITICAL("Timeout de %d secondes atteint. Fin de l'écoute.", TIMEOUT_SECONDS)
 
 if __name__ == "__main__":
-    asyncio.run(listen_for_event())
-    print(PRES)
+    logging.basicConfig(level=logging.WARNING, format='%(levelname)s - %(message)s')
+    try:
+        asyncio.run(listen_for_event())
+    except KeyboardInterrupt:
+        logging.info("Écoute interrompue par l'utilisateur.")
+    with open('events_log_raw.json', 'w') as f:
+        json.dump([EVENTS, EVENTS_TYPES], f, indent=4)
+    pprint.pprint(EVENTS_TYPES)
+    logging.info("Événements enregistrés dans 'events_log_raw.json'.")
