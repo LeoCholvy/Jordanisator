@@ -1,0 +1,21 @@
+maps = {
+    "/Game/Maps/Ascent/Ascent": "Ascent",
+    "/Game/Maps/Duality/Duality": "Bind",
+    "/Game/Maps/Foxtrot/Foxtrot": "Breeze",
+    "/Game/Maps/Canyon/Canyon": "Fracture",
+    "/Game/Maps/Triad/Triad": "Haven",
+    "/Game/Maps/Port/Port": "Icebox",
+    "/Game/Maps/Pitt/Pitt": "Pearl",
+    "/Game/Maps/Juliett/Juliett": "Sunset",
+    "/Game/Maps/Jam/Jam": "Lotus",
+    "/Game/Maps/Bonsai/Bonsai": "Split",
+    "/Game/Maps/Infinity/Infinity": "Abyss",
+    "/Game/Maps/HURM/HURM_Yard/HURM_Yard": "Piazza",
+    "/Game/Maps/HURM/HURM_Bowl/HURM_Bowl": "Kasbah",
+    "/Game/Maps/HURM/HURM_HighTide/HURM_HighTide": "Glitch",
+    "/Game/Maps/HURM/HURM_Helix/HURM_Helix": "Drift",
+    "/Game/Maps/HURM/HURM_Alley/HURM_Alley": "District"
+}
+
+def decodeMap(map_id: str) -> str:
+    return maps.get(map_id, "Unknown Map")

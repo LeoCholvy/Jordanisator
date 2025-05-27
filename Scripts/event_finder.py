@@ -102,12 +102,12 @@ async def listen_for_event():
             logging.CRITICAL("Timeout de %d secondes atteint. Fin de l'écoute.", TIMEOUT_SECONDS)
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.WARNING, format='%(levelname)s - %(message)s')
+    logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
     try:
         asyncio.run(listen_for_event())
     except KeyboardInterrupt:
         logging.info("Écoute interrompue par l'utilisateur.")
-    with open('events_log_raw.json', 'w') as f:
-        json.dump([EVENTS, EVENTS_TYPES], f, indent=4)
-    pprint.pprint(EVENTS_TYPES)
-    logging.info("Événements enregistrés dans 'events_log_raw.json'.")
+    # with open('events_log_raw.json', 'w') as f:
+    #     json.dump([EVENTS, EVENTS_TYPES], f, indent=4)
+    # pprint.pprint(EVENTS_TYPES)
+    # logging.info("Événements enregistrés dans 'events_log_raw.json'.")
