@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import './App.css';
+import './reset.css';
+// import './App.css'
 import Logger from './components/Logger';
 
 // Composants de pages

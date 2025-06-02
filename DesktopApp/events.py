@@ -1,9 +1,12 @@
+import asyncio
 import logging
 from enum import Enum
 from pprint import pprint
 from typing import TypedDict
 
 import globalState
+import webSocketHandler
+from globalState import isMatchInfoComplete, TypeMacthInfo
 from idDecoder import decodeMap
 
 
@@ -78,9 +81,71 @@ class MacthInfo(TypedDict):
 #         globalState.MATCH_INFO = None
 #         logging.warning("Back to menus")
 
-def onPresenceUpdate(private):
-    pass
+def onPresenceUpdate(pres):
+    decodePresence(pres)
+
 def onAresUpdate():
-    pass
+    # webSocketHandler.instance.request_presence()
+    asyncio.create_task(webSocketHandler.instance.request_presence())
 def onHeartbeatUpdate():
-    pass
+    asyncio.create_task(webSocketHandler.instance.request_presence())
+
+
+def updateMatchInfo(user_presence):
+    try:
+        # MAP
+        map = decodeMap(user_presence.get('matchMap'))
+        if globalState.MATCH_INFO is None:
+            globalState.MATCH_INFO = TypeMacthInfo(map=map)
+        else:
+            globalState.MATCH_INFO['map'] = map
+        # TODO: ID
+        # MODE
+        # TODO : decode it (can be Invalid or else) (do we need to get it from the server API ?)
+        # TODO : get the number of round to win
+        globalState.MATCH_INFO['mode'] = user_presence.get('provisioningFlow')
+        # Score
+        if globalState.STATE == ValState.CORE_GAME:
+            score = [
+                user_presence.get('partyOwnerMatchScoreAllyTeam', 0),
+                user_presence.get('partyOwnerMatchScoreEnemyTeam', 0)
+            ]
+            globalState.MATCH_INFO['score'] = score
+
+        # TODO: get all the player of the game infos (maybe need to do a new request
+
+    except Exception as e:
+        logging.error(e)
+        return
+
+
+def decodePresence(pres):
+    puuid = globalState.USER_PLAYER_INFO.get('puuid')
+    print(puuid)
+    user_presence = pres.get(puuid)
+
+    # Update STATE
+    newState:bool = checkStateFromPresence(user_presence.get('sessionLoopState'))
+    if newState or not isMatchInfoComplete():
+        updateMatchInfo(user_presence)
+
+def checkStateFromPresence(sessionLoopState) -> bool:
+    if sessionLoopState is None:
+        return False
+    if sessionLoopState == globalState.STATE:
+        return False
+    if sessionLoopState == ValState.MENUS:
+        globalState.STATE = ValState.MENUS
+        return False
+    elif sessionLoopState == ValState.PREGAME:
+        if globalState.STATE == ValState.PREGAME:
+            return False
+        globalState.STATE = ValState.PREGAME
+        return True
+    elif sessionLoopState == ValState.CORE_GAME:
+        if globalState.STATE == ValState.CORE_GAME:
+            return False
+        globalState.STATE = ValState.CORE_GAME
+        return True
+
+    return False
